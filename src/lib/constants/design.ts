@@ -49,9 +49,9 @@ export const spacing = {
 } as const;
 
 export const transitions = {
-  base: 'transition-all duration-200 ease-out',
-  slow: 'transition-all duration-300 ease-out',
-  spring: 'transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)]',
+  base: 'transition-colors duration-200 ease-out',
+  slow: 'transition-colors duration-300 ease-out',
+  shadow: 'transition-shadow duration-200 ease-out',
 } as const;
 
 export const shadows = {

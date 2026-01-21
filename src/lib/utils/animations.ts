@@ -41,4 +41,4 @@ export const slideInRight: Variants = {
 };
 
 // Viewport settings for scroll-triggered animations
-export const viewportOnce = { once: true, margin: '-50px' };
+export const viewportOnce = { once: true, margin: '-100px' } as const;
