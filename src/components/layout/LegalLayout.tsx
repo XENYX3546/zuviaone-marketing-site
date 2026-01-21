@@ -22,7 +22,7 @@ export function LegalLayout({ children, title, lastUpdated }: LegalLayoutProps) 
         </Section>
         <Section>
           <Container>
-            <div className="prose prose-neutral max-w-none prose-headings:font-semibold prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4 prose-h3:text-lg prose-h3:mt-6 prose-h3:mb-3 prose-p:text-neutral-600 prose-li:text-neutral-600 prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline">
+            <div className="legal-content max-w-4xl">
               {children}
             </div>
           </Container>
