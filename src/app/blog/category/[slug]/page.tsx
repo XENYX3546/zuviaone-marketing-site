@@ -61,6 +61,42 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
+// BreadcrumbList schema for category pages
+function BreadcrumbSchema({ name, slug }: { name: string; slug: string }) {
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: siteConfig.url,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Blog',
+        item: `${siteConfig.url}/blog`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name,
+        item: `${siteConfig.url}/blog/category/${slug}`,
+      },
+    ],
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      // eslint-disable-next-line react/no-danger -- JSON-LD structured data
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+
 // Schema for category archive
 function CategorySchema({
   category,
@@ -98,21 +134,31 @@ export default async function CategoryPage({ params, searchParams }: Props) {
   const { page: pageParam } = await searchParams;
   const page = pageParam ? Number.parseInt(pageParam, 10) : 1;
 
-  // Get all categories and find the current one
-  const categoriesResponse = await listCategories();
-  const {categories} = categoriesResponse.data;
+  // Get all categories and find the current one (with error handling)
+  let categories: Awaited<ReturnType<typeof listCategories>>['data']['categories'] = [];
+  let postCount = 0;
+
+  try {
+    const [categoriesResponse, postsResponse] = await Promise.all([
+      listCategories(),
+      listPosts({ category: slug, limit: 1 }),
+    ]);
+    ({ categories } = categoriesResponse.data);
+    ({ total: postCount } = postsResponse.meta.pagination);
+  } catch (error) {
+    console.error('Failed to fetch category data:', error);
+    notFound();
+  }
+
   const category = categories.find((c) => c.slug === slug);
 
   if (!category) {
     notFound();
   }
 
-  // Get post count for this category
-  const postsResponse = await listPosts({ category: slug, limit: 1 });
-  const postCount = postsResponse.meta.pagination.total;
-
   return (
     <LandingLayout>
+      <BreadcrumbSchema name={category.name} slug={slug} />
       <CategorySchema category={category} postCount={postCount} />
 
       {/* Hero */}

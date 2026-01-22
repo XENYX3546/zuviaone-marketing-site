@@ -90,9 +90,15 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
   const searchQuery = params.q || undefined;
   const tag = params.tag || undefined;
 
-  // Get categories for filter pills
-  const categoriesResponse = await listCategories();
-  const {categories} = categoriesResponse.data;
+  // Get categories for filter pills (with error handling)
+  let categories: Awaited<ReturnType<typeof listCategories>>['data']['categories'] = [];
+  try {
+    const categoriesResponse = await listCategories();
+    ({ categories } = categoriesResponse.data);
+  } catch {
+    // If API fails, continue with empty categories
+    console.error('Failed to fetch blog categories');
+  }
 
   const pageTitle = getPageTitle(searchQuery, tag);
   const pageDescription = getPageDescription(searchQuery, tag);

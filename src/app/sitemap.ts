@@ -88,6 +88,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(post.publishedAt),
       changeFrequency: 'weekly' as const,
       priority: 0.7,
+      // Include featured images in sitemap for image SEO
+      images: post.featuredImage.url ? [post.featuredImage.url] : undefined,
     }));
 
     // Fetch all categories

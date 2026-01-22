@@ -52,6 +52,9 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: siteConfig.url,
+    types: {
+      'application/rss+xml': `${siteConfig.url}/feed.xml`,
+    },
   },
   openGraph: {
     type: 'website',
@@ -105,6 +108,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <head>
+        {/* Preconnect to external domains for performance */}
+        <link rel="preconnect" href="https://app.zuviaone.com" />
+        <link rel="dns-prefetch" href="https://app.zuviaone.com" />
+
         {/* Structured Data */}
         <OrganizationSchema />
         <WebSiteSchema />

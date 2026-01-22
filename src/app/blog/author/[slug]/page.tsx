@@ -72,6 +72,42 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
+// BreadcrumbList schema for author pages
+function BreadcrumbSchema({ name, slug }: { name: string; slug: string }) {
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: siteConfig.url,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Blog',
+        item: `${siteConfig.url}/blog`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name,
+        item: `${siteConfig.url}/blog/author/${slug}`,
+      },
+    ],
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      // eslint-disable-next-line react/no-danger -- JSON-LD structured data
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+
 // Schema for author profile
 function AuthorSchema({
   author,
@@ -146,20 +182,28 @@ export default async function AuthorPage({ params, searchParams }: Props) {
   const { page: pageParam } = await searchParams;
   const page = pageParam ? Number.parseInt(pageParam, 10) : 1;
 
-  let author;
+  let author: Awaited<ReturnType<typeof getAuthor>>['data']['author'] | null = null;
+  let postCount = 0;
+
   try {
-    const response = await getAuthor(slug, { postsLimit: 0 });
-    ({ author } = response.data);
+    const [authorResponse, postsResponse] = await Promise.all([
+      getAuthor(slug, { postsLimit: 0 }),
+      listPosts({ author: slug, limit: 1 }),
+    ]);
+    ({ author } = authorResponse.data);
+    ({ total: postCount } = postsResponse.meta.pagination);
   } catch (error) {
     if (error instanceof BlogApiError && error.code === 'BLOG_AUTHOR_NOT_FOUND') {
       notFound();
     }
-    throw error;
+    // For any other error, show 404 instead of crashing
+    console.error('Failed to fetch author data:', error);
+    notFound();
   }
 
-  // Get post count
-  const postsResponse = await listPosts({ author: slug, limit: 1 });
-  const postCount = postsResponse.meta.pagination.total;
+  if (!author) {
+    notFound();
+  }
 
   const breadcrumbs = [
     { label: 'Home', href: '/' },
@@ -169,6 +213,7 @@ export default async function AuthorPage({ params, searchParams }: Props) {
 
   return (
     <LandingLayout>
+      <BreadcrumbSchema name={author.displayName} slug={slug} />
       <AuthorSchema author={author} />
 
       {/* Author Profile Header */}

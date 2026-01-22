@@ -13,12 +13,25 @@ export async function BlogPostGrid({
   basePath = '/blog',
   showFeaturedFirst = true,
 }: BlogPostGridProps) {
-  const response = await listPosts({
-    limit: 12,
-    ...params,
-  });
+  let response: Awaited<ReturnType<typeof listPosts>>;
 
-  const { data: posts, meta } = response;
+  try {
+    response = await listPosts({
+      limit: 12,
+      ...params,
+    });
+  } catch (error) {
+    console.error('Failed to fetch blog posts:', error);
+    // Return empty state on error
+    return (
+      <div className="text-center py-12">
+        <p className="text-lg text-neutral-600">Unable to load articles at this time.</p>
+        <p className="mt-2 text-neutral-500">Please try again later.</p>
+      </div>
+    );
+  }
+
+  const { data: posts, meta: { pagination } } = response;
 
   if (posts.length === 0) {
     return (
@@ -35,13 +48,13 @@ export async function BlogPostGrid({
 
   // Sort to show featured first on first page
   const sortedPosts =
-    showFeaturedFirst && meta.pagination.page === 1
+    showFeaturedFirst && pagination.page === 1
       ? [...posts].sort((a, b) => (b.isFeatured ? 1 : 0) - (a.isFeatured ? 1 : 0))
       : posts;
 
   // Get the first featured post for larger display
   const featuredPost =
-    showFeaturedFirst && meta.pagination.page === 1
+    showFeaturedFirst && pagination.page === 1
       ? sortedPosts.find((p) => p.isFeatured)
       : null;
 
@@ -78,10 +91,10 @@ export async function BlogPostGrid({
       </div>
 
       {/* Pagination */}
-      {meta.pagination.totalPages > 1 && (
+      {pagination.totalPages > 1 && (
         <div className="mt-12">
           <BlogPagination
-            pagination={meta.pagination}
+            pagination={pagination}
             basePath={basePath}
             searchParams={searchParams}
           />

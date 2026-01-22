@@ -1,7 +1,7 @@
 import { LandingLayout } from '@/components/layout';
 import { CTASection } from '@/features/home/client';
 import { PricingHero, PricingCards, PricingFAQ } from '@/features/pricing/client';
-import { siteConfig } from '@/lib/constants';
+import { siteConfig, pricingFAQs } from '@/lib/constants';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -95,10 +95,35 @@ function PricingSchema() {
   );
 }
 
+// FAQPage schema for rich snippets
+function FAQPageSchema() {
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: pricingFAQs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      // eslint-disable-next-line react/no-danger -- JSON-LD structured data
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+
 export default function PricingPage() {
   return (
     <LandingLayout>
       <PricingSchema />
+      <FAQPageSchema />
       <PricingHero />
       <PricingCards />
       <PricingFAQ />

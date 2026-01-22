@@ -15,13 +15,21 @@ export async function BlogSidebar({
   showRecentPosts = true,
   showCategories = true,
 }: BlogSidebarProps) {
-  const [categoriesResponse, recentPostsResponse] = await Promise.all([
-    showCategories ? listCategories() : null,
-    showRecentPosts ? getRecentPosts(5) : null,
-  ]);
+  let categories: Awaited<ReturnType<typeof listCategories>>['data']['categories'] = [];
+  let recentPosts: Awaited<ReturnType<typeof getRecentPosts>>['data'] = [];
 
-  const categories = categoriesResponse?.data.categories || [];
-  const recentPosts = recentPostsResponse?.data || [];
+  try {
+    const [categoriesResponse, recentPostsResponse] = await Promise.all([
+      showCategories ? listCategories() : null,
+      showRecentPosts ? getRecentPosts(5) : null,
+    ]);
+
+    categories = categoriesResponse?.data.categories || [];
+    recentPosts = recentPostsResponse?.data || [];
+  } catch (error) {
+    console.error('Failed to fetch sidebar data:', error);
+    // Continue with empty data - sidebar will just show newsletter CTA
+  }
 
   return (
     <aside className="space-y-8">

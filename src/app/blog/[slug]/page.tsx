@@ -42,7 +42,7 @@ export async function generateStaticParams() {
   }
 }
 
-// Generate metadata
+// Generate metadata with enhanced article tags
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
 
@@ -50,6 +50,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const response = await getPost(slug);
     const { post } = response.data;
     const { seo } = post;
+
+    // Get primary category for article:section
+    const primaryCategory = post.categories[0]?.name;
+    // Tags are already strings
+    const articleTags = post.tags;
 
     return {
       title: seo.metaTitle || post.title,
@@ -64,7 +69,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         url: `${siteConfig.url}/blog/${slug}`,
         type: 'article',
         publishedTime: post.publishedAt,
-        authors: [post.author.displayName],
+        modifiedTime: post.publishedAt,
+        authors: [`${siteConfig.url}/blog/author/${post.author.slug}`],
+        section: primaryCategory,
+        tags: articleTags.length > 0 ? articleTags : undefined,
         images: getOgImages(seo.ogImageUrl, post.featuredImage.url),
       },
       twitter: {
@@ -81,10 +89,46 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
+// BreadcrumbList schema for blog posts
+function BreadcrumbSchema({ title, slug }: { title: string; slug: string }) {
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: siteConfig.url,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Blog',
+        item: `${siteConfig.url}/blog`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: title,
+        item: `${siteConfig.url}/blog/${slug}`,
+      },
+    ],
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      // eslint-disable-next-line react/no-danger -- JSON-LD structured data
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
 
-  let post;
+  let post: Awaited<ReturnType<typeof getPost>>['data']['post'] | null = null;
   try {
     const response = await getPost(slug);
     ({ post } = response.data);
@@ -92,7 +136,13 @@ export default async function BlogPostPage({ params }: Props) {
     if (error instanceof BlogApiError && (error.code === 'BLOG_POST_NOT_FOUND' || error.code === 'BLOG_POST_NOT_PUBLISHED')) {
       notFound();
     }
-    throw error;
+    // For any other error, show 404 instead of crashing
+    console.error('Failed to fetch blog post:', error);
+    notFound();
+  }
+
+  if (!post) {
+    notFound();
   }
 
   const breadcrumbs = [
@@ -103,6 +153,9 @@ export default async function BlogPostPage({ params }: Props) {
 
   return (
     <LandingLayout>
+      {/* BreadcrumbList Schema */}
+      <BreadcrumbSchema title={post.title} slug={slug} />
+
       {/* JSON-LD Structured Data */}
       {post.structuredData && (
         <script
