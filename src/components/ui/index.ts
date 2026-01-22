@@ -5,3 +5,4 @@ export { Card } from './Card';
 export { Badge } from './Badge';
 export { Icon } from './Icon';
 export { AnimatedSection } from './AnimatedSection';
+export { Breadcrumbs, type BreadcrumbItem } from './Breadcrumbs';

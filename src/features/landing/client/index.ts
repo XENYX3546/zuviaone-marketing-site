@@ -6,5 +6,6 @@ export { ProblemSolutionSection } from './ProblemSolutionSection';
 export { SolutionSection } from './SolutionSection';
 export { BenefitsSection } from './BenefitsSection';
 export { UseCasesSection } from './UseCasesSection';
+export { FeatureIndustries } from './FeatureIndustries';
 export { FeatureCTA } from './FeatureCTA';
 export { FeatureLandingPage } from './FeatureLandingPage';

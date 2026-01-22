@@ -7,6 +7,7 @@ import { ProblemSolutionSection } from './ProblemSolutionSection';
 import { SolutionSection } from './SolutionSection';
 import { BenefitsSection } from './BenefitsSection';
 import { UseCasesSection } from './UseCasesSection';
+import { FeatureIndustries } from './FeatureIndustries';
 import { FeatureCTA } from './FeatureCTA';
 
 type FeatureLandingPageProps = {
@@ -39,6 +40,7 @@ export function FeatureLandingPage({ data }: FeatureLandingPageProps) {
         items={data.benefits.items}
       />
       <UseCasesSection title={data.useCases.title} items={data.useCases.items} />
+      <FeatureIndustries featureSlug={data.slug} featureName={data.hero.badge} />
       <FeatureCTA title={data.cta.title} description={data.cta.description} />
     </LandingLayout>
   );
