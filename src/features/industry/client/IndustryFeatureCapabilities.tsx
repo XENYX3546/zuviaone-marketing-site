@@ -3,8 +3,8 @@
 import { motion } from 'framer-motion';
 import { Container, Section, Icon } from '@/components/ui';
 import { fadeInUp, staggerContainer, viewportOnce } from '@/lib/utils/animations';
-import type { IndustryData } from '@/lib/constants/industries';
 import type { FeaturePageData } from '@/lib/constants/feature-pages';
+import type { IndustryData } from '@/lib/constants/industries';
 
 type IconName = 'users' | 'target' | 'filter' | 'calendar' | 'map-pin' | 'check-square'
   | 'inbox' | 'message-square' | 'phone' | 'file-text' | 'clipboard' | 'credit-card'
@@ -15,7 +15,7 @@ type IndustryFeatureCapabilitiesProps = {
   feature: FeaturePageData;
 };
 
-export function IndustryFeatureCapabilities({ industry, feature }: IndustryFeatureCapabilitiesProps) {
+export function IndustryFeatureCapabilities({ industry: _industry, feature }: IndustryFeatureCapabilitiesProps) {
   return (
     <Section className="bg-neutral-50">
       <Container>

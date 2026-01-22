@@ -63,7 +63,7 @@ export function getMotionSafeVariants(
   variants: Variants,
   prefersReducedMotion: boolean
 ): Variants {
-  if (!prefersReducedMotion) return variants;
+  if (!prefersReducedMotion) {return variants;}
 
   // Return reduced motion version - just fade, no transforms
   return {

@@ -22,7 +22,7 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
 
   // Security and performance headers
-  async headers() {
+  headers() {
     return [
       {
         source: '/:path*',
@@ -71,7 +71,7 @@ const nextConfig: NextConfig = {
   },
 
   // Redirects for removed/non-existent pages to prevent 404s
-  async redirects() {
+  redirects() {
     return [
       // Redirect old/broken links to relevant pages
       {

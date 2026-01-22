@@ -1,11 +1,11 @@
 'use client';
 
-import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useState } from 'react';
 import { Container, Section, Icon, AnimatedSection } from '@/components/ui';
 import { pricingFAQs, type FAQ } from '@/lib/constants';
-import { cn } from '@/lib/utils';
 import { transitions } from '@/lib/constants';
+import { cn } from '@/lib/utils';
 
 export function PricingFAQ() {
   return (

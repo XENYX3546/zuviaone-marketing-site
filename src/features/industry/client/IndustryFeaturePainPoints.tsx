@@ -3,15 +3,15 @@
 import { motion } from 'framer-motion';
 import { Container, Section, Icon } from '@/components/ui';
 import { fadeInUp, staggerContainer, viewportOnce } from '@/lib/utils/animations';
-import type { IndustryData } from '@/lib/constants/industries';
 import type { FeaturePageData } from '@/lib/constants/feature-pages';
+import type { IndustryData } from '@/lib/constants/industries';
 
 type IndustryFeaturePainPointsProps = {
   industry: IndustryData;
   feature: FeaturePageData;
 };
 
-export function IndustryFeaturePainPoints({ industry, feature }: IndustryFeaturePainPointsProps) {
+export function IndustryFeaturePainPoints({ industry: _industry, feature }: IndustryFeaturePainPointsProps) {
   // Use feature-specific problem/solution items
   const items = feature.problemSolution.items.slice(0, 4);
 

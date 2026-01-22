@@ -1,6 +1,6 @@
 import { type ReactNode } from 'react';
-import { cn } from '@/lib/utils';
 import { spacing } from '@/lib/constants';
+import { cn } from '@/lib/utils';
 
 type ContainerProps = {
   children: ReactNode;

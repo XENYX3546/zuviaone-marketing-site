@@ -1,11 +1,11 @@
 'use client';
 
-import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useState } from 'react';
 import { Container, Section, Button, Icon } from '@/components/ui';
 import { pricingPlans, ctaLinks, type PricingPlan } from '@/lib/constants';
-import { staggerContainer, fadeInUp } from '@/lib/utils/animations';
 import { cn } from '@/lib/utils';
+import { staggerContainer, fadeInUp } from '@/lib/utils/animations';
 import { PricingToggle } from './PricingToggle';
 
 export function PricingCards() {

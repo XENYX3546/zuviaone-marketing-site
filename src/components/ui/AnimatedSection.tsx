@@ -1,9 +1,9 @@
 'use client';
 
-import { type ReactNode } from 'react';
 import { motion, type Variants } from 'framer-motion';
-import { fadeInUp, viewportOnce } from '@/lib/utils/animations';
+import { type ReactNode } from 'react';
 import { cn } from '@/lib/utils';
+import { fadeInUp, viewportOnce } from '@/lib/utils/animations';
 
 type AnimatedSectionProps = {
   children: ReactNode;

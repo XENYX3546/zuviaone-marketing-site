@@ -1,9 +1,9 @@
 'use client';
 
-import { forwardRef, type ButtonHTMLAttributes, type AnchorHTMLAttributes } from 'react';
 import Link from 'next/link';
-import { cn } from '@/lib/utils';
+import { forwardRef, type ButtonHTMLAttributes, type AnchorHTMLAttributes } from 'react';
 import { transitions } from '@/lib/constants';
+import { cn } from '@/lib/utils';
 
 type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'outline';
 type ButtonSize = 'sm' | 'md' | 'lg';
@@ -46,7 +46,7 @@ export const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonPr
     );
 
     if ('href' in props && props.href) {
-      const { href, ...linkProps } = props as ButtonAsLink;
+      const { href, children, ...linkProps } = props as ButtonAsLink & { children?: React.ReactNode };
       const isExternal = href.startsWith('http');
 
       if (isExternal) {
@@ -58,7 +58,9 @@ export const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonPr
             target="_blank"
             rel="noopener noreferrer"
             {...linkProps}
-          />
+          >
+            {children}
+          </a>
         );
       }
 
@@ -68,7 +70,9 @@ export const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonPr
           href={href}
           className={baseStyles}
           {...linkProps}
-        />
+        >
+          {children}
+        </Link>
       );
     }
 

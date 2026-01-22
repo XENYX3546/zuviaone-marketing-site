@@ -1,7 +1,7 @@
 'use client';
 
-import { cn } from '@/lib/utils';
 import { transitions } from '@/lib/constants';
+import { cn } from '@/lib/utils';
 
 type PricingToggleProps = {
   isAnnual: boolean;

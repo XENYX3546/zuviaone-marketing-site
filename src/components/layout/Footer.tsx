@@ -97,7 +97,7 @@ function FooterSection({
   viewAllLabel,
 }: {
   title: string;
-  links: readonly { readonly label: string; readonly href: string }[] | { label: string; href: string }[];
+  links: ReadonlyArray<{ readonly label: string; readonly href: string }> | Array<{ label: string; href: string }>;
   showViewAll?: boolean;
   viewAllHref?: string;
   viewAllLabel?: string;

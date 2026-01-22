@@ -1,6 +1,6 @@
-import type { Metadata } from 'next';
-import { featurePages, siteConfig } from '@/lib/constants';
 import { FeatureLandingPage } from '@/features/landing/client';
+import { featurePages, siteConfig } from '@/lib/constants';
+import type { Metadata } from 'next';
 
 const data = featurePages['field-service'];
 

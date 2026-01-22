@@ -1,7 +1,7 @@
 import { type ReactNode } from 'react';
 import { Container, Section } from '@/components/ui';
-import { Header } from './Header';
 import { Footer } from './Footer';
+import { Header } from './Header';
 
 // Import legal-specific styles only for legal pages
 import '@/app/legal.css';

@@ -1,18 +1,18 @@
 // Industry + Feature Content Matrix
 // Provides customized messaging for each industry/feature combination
 
-import { industrySlugs } from './industries';
 import { featurePageSlugs } from './feature-pages';
+import { industrySlugs } from './industries';
 
 export type IndustryFeatureContent = {
   headline: string;
   subheadline: string;
   benefits: string[];
   // Optional overrides for specific pain points
-  painPoints?: {
+  painPoints?: Array<{
     problem: string;
     solution: string;
-  }[];
+  }>;
 };
 
 // Feature keys mapped to URL slugs
@@ -266,8 +266,8 @@ export function getIndustryFeatureContent(
   // Replace placeholders with industry-specific terms
   const replacePlaceholders = (text: string): string => {
     return text
-      .replace(/{industry}/g, industryData.name + 's')
-      .replace(/{industryName}/g, industryData.name.toLowerCase() + 's')
+      .replace(/{industry}/g, `${industryData.name  }s`)
+      .replace(/{industryName}/g, `${industryData.name.toLowerCase()  }s`)
       .replace(/{industryLower}/g, industryData.name.toLowerCase())
       .replace(/{customer}/g, industryData.terminology.customer)
       .replace(/{customers}/g, industryData.terminology.customers)
@@ -288,8 +288,8 @@ export function getIndustryFeatureContent(
 }
 
 // Get all valid industry + feature combinations for static generation
-export function getAllIndustryFeatureCombinations(): { industry: string; feature: string }[] {
-  const combinations: { industry: string; feature: string }[] = [];
+export function getAllIndustryFeatureCombinations(): Array<{ industry: string; feature: string }> {
+  const combinations: Array<{ industry: string; feature: string }> = [];
 
   for (const industry of industrySlugs) {
     for (const feature of featurePageSlugs) {

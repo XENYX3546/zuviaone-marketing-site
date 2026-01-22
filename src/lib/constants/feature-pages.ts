@@ -12,39 +12,39 @@ export type FeaturePageData = {
     title: string;
     highlight: string;
     description: string;
-    stats?: { value: string; label: string }[];
+    stats?: Array<{ value: string; label: string }>;
   };
   problemSolution: {
     title: string;
     description: string;
-    items: {
+    items: Array<{
       problem: string;
       solution: string;
-    }[];
+    }>;
   };
   solution: {
     title: string;
     description: string;
-    features: {
+    features: Array<{
       icon: string;
       title: string;
       description: string;
-    }[];
+    }>;
   };
   benefits: {
     title: string;
     description: string;
-    items: {
+    items: Array<{
       title: string;
       description: string;
-    }[];
+    }>;
   };
   useCases: {
     title: string;
-    items: {
+    items: Array<{
       industry: string;
       description: string;
-    }[];
+    }>;
   };
   cta: {
     title: string;

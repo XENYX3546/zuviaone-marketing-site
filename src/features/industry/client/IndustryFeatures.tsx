@@ -1,15 +1,15 @@
 'use client';
 
-import Link from 'next/link';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import { Container, Section, Icon } from '@/components/ui';
 import { fadeInUp, staggerContainer, viewportOnce } from '@/lib/utils/animations';
-import type { IndustryData } from '@/lib/constants/industries';
 import type { FeaturePageData } from '@/lib/constants/feature-pages';
+import type { IndustryData } from '@/lib/constants/industries';
 
 type IndustryFeaturesProps = {
   industry: IndustryData;
-  features: (FeaturePageData & { slug: string })[];
+  features: Array<FeaturePageData & { slug: string }>;
 };
 
 const featureIcons: Record<string, 'users' | 'calendar' | 'map-pin' | 'file-text' | 'message-square' | 'zap' | 'eye' | 'bar-chart'> = {

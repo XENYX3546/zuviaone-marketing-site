@@ -2,13 +2,13 @@
 
 import { LandingLayout } from '@/components/layout';
 import { type FeaturePageData } from '@/lib/constants';
+import { BenefitsSection } from './BenefitsSection';
+import { FeatureCTA } from './FeatureCTA';
+import { FeatureIndustries } from './FeatureIndustries';
 import { FeatureLandingHero } from './FeatureLandingHero';
 import { ProblemSolutionSection } from './ProblemSolutionSection';
 import { SolutionSection } from './SolutionSection';
-import { BenefitsSection } from './BenefitsSection';
 import { UseCasesSection } from './UseCasesSection';
-import { FeatureIndustries } from './FeatureIndustries';
-import { FeatureCTA } from './FeatureCTA';
 
 type FeatureLandingPageProps = {
   data: FeaturePageData;

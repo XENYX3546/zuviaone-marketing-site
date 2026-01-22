@@ -1,7 +1,8 @@
-import type { Metadata, Viewport } from 'next';
+import { Analytics } from '@vercel/analytics/next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { siteConfig } from '@/lib/constants';
+import type { Metadata, Viewport } from 'next';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -104,12 +105,6 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <head>
-        {/* DNS prefetch and preconnect for performance */}
-        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-        <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-
         {/* Structured Data */}
         <OrganizationSchema />
         <WebSiteSchema />
@@ -117,6 +112,7 @@ export default function RootLayout({
       </head>
       <body className="font-sans antialiased text-neutral-900 bg-white">
         {children}
+        <Analytics />
       </body>
     </html>
   );

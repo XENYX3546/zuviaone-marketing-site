@@ -1,6 +1,12 @@
-import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { LandingLayout } from '@/components/layout';
+import { IndustryFeatureBenefits } from '@/features/industry/client/IndustryFeatureBenefits';
+import { IndustryFeatureCapabilities } from '@/features/industry/client/IndustryFeatureCapabilities';
+import { IndustryFeatureCTA } from '@/features/industry/client/IndustryFeatureCTA';
+import { IndustryFeatureHero } from '@/features/industry/client/IndustryFeatureHero';
+import { IndustryFeatureOtherFeatures } from '@/features/industry/client/IndustryFeatureOtherFeatures';
+import { IndustryFeaturePainPoints } from '@/features/industry/client/IndustryFeaturePainPoints';
+import { IndustryFeatureSameFeature } from '@/features/industry/client/IndustryFeatureSameFeature';
 import {
   industries,
   siteConfig,
@@ -9,20 +15,14 @@ import {
   getIndustryFeatureContent,
   getAllIndustryFeatureCombinations,
 } from '@/lib/constants';
-import { IndustryFeatureHero } from '@/features/industry/client/IndustryFeatureHero';
-import { IndustryFeatureBenefits } from '@/features/industry/client/IndustryFeatureBenefits';
-import { IndustryFeaturePainPoints } from '@/features/industry/client/IndustryFeaturePainPoints';
-import { IndustryFeatureCapabilities } from '@/features/industry/client/IndustryFeatureCapabilities';
-import { IndustryFeatureCTA } from '@/features/industry/client/IndustryFeatureCTA';
-import { IndustryFeatureOtherFeatures } from '@/features/industry/client/IndustryFeatureOtherFeatures';
-import { IndustryFeatureSameFeature } from '@/features/industry/client/IndustryFeatureSameFeature';
+import type { Metadata } from 'next';
 
 type Props = {
   params: Promise<{ industry: string; feature: string }>;
 };
 
 // Generate static pages for all industry + feature combinations
-export async function generateStaticParams() {
+export function generateStaticParams() {
   return getAllIndustryFeatureCombinations();
 }
 
@@ -168,11 +168,11 @@ export default async function IndustryFeaturePage({ params }: Props) {
 
   // Get other features for cross-linking
   const otherFeatures = featurePageSlugs
-    .filter((slug) => slug !== featureSlug)
+    .filter((s) => s !== featureSlug)
     .slice(0, 4)
-    .map((slug) => ({
-      slug,
-      ...featurePages[slug],
+    .map((s) => ({
+      ...featurePages[s],
+      slug: s,
     }));
 
   return (

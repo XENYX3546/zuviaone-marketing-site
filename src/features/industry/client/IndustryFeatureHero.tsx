@@ -4,8 +4,8 @@ import { motion } from 'framer-motion';
 import { Container, Section, Button, Badge, Breadcrumbs } from '@/components/ui';
 import { ctaLinks } from '@/lib/constants';
 import { fadeInUp, staggerContainer } from '@/lib/utils/animations';
-import type { IndustryData } from '@/lib/constants/industries';
 import type { FeaturePageData } from '@/lib/constants/feature-pages';
+import type { IndustryData } from '@/lib/constants/industries';
 import type { IndustryFeatureContent } from '@/lib/constants/industry-features';
 
 type IndustryFeatureHeroProps = {

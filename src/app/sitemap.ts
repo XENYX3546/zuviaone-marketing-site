@@ -1,4 +1,4 @@
-import { MetadataRoute } from 'next';
+import { type MetadataRoute } from 'next';
 import { siteConfig, featurePageSlugs, industrySlugs } from '@/lib/constants';
 
 export default function sitemap(): MetadataRoute.Sitemap {

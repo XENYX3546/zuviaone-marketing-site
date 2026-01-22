@@ -1,19 +1,19 @@
-import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { LandingLayout } from '@/components/layout';
-import { industries, industrySlugs, siteConfig, featurePages, featurePageSlugs } from '@/lib/constants';
+import { IndustryCTA } from '@/features/industry/client/IndustryCTA';
+import { IndustryFeatures } from '@/features/industry/client/IndustryFeatures';
 import { IndustryHero } from '@/features/industry/client/IndustryHero';
 import { IndustryPainPoints } from '@/features/industry/client/IndustryPainPoints';
-import { IndustryFeatures } from '@/features/industry/client/IndustryFeatures';
 import { IndustryStats } from '@/features/industry/client/IndustryStats';
-import { IndustryCTA } from '@/features/industry/client/IndustryCTA';
+import { industries, industrySlugs, siteConfig, featurePages, featurePageSlugs } from '@/lib/constants';
+import type { Metadata } from 'next';
 
 type Props = {
   params: Promise<{ industry: string }>;
 };
 
 // Generate static pages for all industries
-export async function generateStaticParams() {
+export function generateStaticParams() {
   return industrySlugs.map((industry) => ({
     industry,
   }));
@@ -110,9 +110,9 @@ export default async function IndustryPage({ params }: Props) {
   }
 
   // Get feature data for the features grid
-  const features = featurePageSlugs.map((slug) => ({
-    slug,
-    ...featurePages[slug],
+  const features = featurePageSlugs.map((s) => ({
+    ...featurePages[s],
+    slug: s,
   }));
 
   return (

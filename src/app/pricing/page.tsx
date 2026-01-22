@@ -1,8 +1,8 @@
-import type { Metadata } from 'next';
 import { LandingLayout } from '@/components/layout';
-import { PricingHero, PricingCards, PricingFAQ } from '@/features/pricing/client';
 import { CTASection } from '@/features/home/client';
+import { PricingHero, PricingCards, PricingFAQ } from '@/features/pricing/client';
 import { siteConfig } from '@/lib/constants';
+import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Pricing',

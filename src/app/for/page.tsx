@@ -1,8 +1,8 @@
-import type { Metadata } from 'next';
 import Link from 'next/link';
 import { LandingLayout } from '@/components/layout';
 import { Container, Section, Icon } from '@/components/ui';
 import { industries, industrySlugs, siteConfig } from '@/lib/constants';
+import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Business Software by Industry',

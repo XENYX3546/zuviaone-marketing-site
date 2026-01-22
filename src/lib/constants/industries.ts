@@ -25,16 +25,16 @@ export type IndustryData = {
     technician: string;
   };
   // Industry-specific pain points
-  painPoints: {
+  painPoints: Array<{
     title: string;
     description: string;
-  }[];
+  }>;
   // Stats to display
-  stats: {
+  stats: Array<{
     value: string;
     label: string;
     description: string;
-  }[];
+  }>;
   // Common use cases
   useCases: string[];
   // Hero section customization

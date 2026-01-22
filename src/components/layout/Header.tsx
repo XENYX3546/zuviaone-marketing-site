@@ -1,8 +1,8 @@
 'use client';
 
-import { useState } from 'react';
-import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
+import Link from 'next/link';
+import { useState } from 'react';
 import { Container, Button, Icon } from '@/components/ui';
 import { siteConfig, navigation, ctaLinks } from '@/lib/constants';
 import { cn } from '@/lib/utils';

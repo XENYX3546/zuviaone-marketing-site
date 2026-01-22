@@ -1,33 +1,30 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useSyncExternalStore } from 'react';
+
+const QUERY = '(prefers-reduced-motion: reduce)';
+
+function getSnapshot(): boolean {
+  return window.matchMedia(QUERY).matches;
+}
+
+function getServerSnapshot(): boolean {
+  return false; // Default to no reduced motion on server
+}
+
+function subscribe(callback: () => void): () => void {
+  const mediaQuery = window.matchMedia(QUERY);
+  mediaQuery.addEventListener('change', callback);
+  return () => {
+    mediaQuery.removeEventListener('change', callback);
+  };
+}
 
 /**
  * Hook to detect if the user prefers reduced motion.
  * Returns true if the user has requested reduced motion in their system settings.
- * Defaults to false during SSR for optimal initial render.
+ * Uses useSyncExternalStore for proper React 18+ external subscription handling.
  */
 export function useReducedMotion(): boolean {
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-
-  useEffect(() => {
-    // Check if the media query is supported
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-    // Set the initial value
-    setPrefersReducedMotion(mediaQuery.matches);
-
-    // Listen for changes
-    const handleChange = (event: MediaQueryListEvent) => {
-      setPrefersReducedMotion(event.matches);
-    };
-
-    mediaQuery.addEventListener('change', handleChange);
-
-    return () => {
-      mediaQuery.removeEventListener('change', handleChange);
-    };
-  }, []);
-
-  return prefersReducedMotion;
+  return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 }

@@ -8,11 +8,11 @@ export type LandingPageData = {
   features: {
     title: string;
     description: string;
-    items: {
+    items: Array<{
       icon: string;
       title: string;
       description: string;
-    }[];
+    }>;
   };
   benefits?: {
     title: string;

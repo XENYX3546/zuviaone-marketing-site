@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Container, Section, Icon } from '@/components/ui';
+import { Container, Section } from '@/components/ui';
 import { fadeInUp, staggerContainer, viewportOnce } from '@/lib/utils/animations';
 import type { IndustryData } from '@/lib/constants/industries';
 

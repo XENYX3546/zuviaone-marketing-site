@@ -1,6 +1,6 @@
-import type { Metadata } from 'next';
 import { LegalLayout } from '@/components/layout';
 import { siteConfig } from '@/lib/constants';
+import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Terms & Conditions',
