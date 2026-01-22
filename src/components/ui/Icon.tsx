@@ -4,7 +4,9 @@ type IconName =
   | 'users' | 'target' | 'filter' | 'calendar' | 'map-pin' | 'check-square'
   | 'inbox' | 'message-square' | 'phone' | 'file-text' | 'clipboard' | 'credit-card'
   | 'cpu' | 'zap' | 'message-circle' | 'bar-chart' | 'pie-chart' | 'eye'
-  | 'check' | 'arrow-right' | 'menu' | 'x' | 'chevron-down';
+  | 'check' | 'arrow-right' | 'arrow-left' | 'menu' | 'x'
+  | 'chevron-down' | 'chevron-left' | 'chevron-right'
+  | 'search' | 'link' | 'twitter' | 'linkedin' | 'github' | 'globe' | 'facebook';
 
 type IconProps = {
   name: IconName;
@@ -37,9 +39,19 @@ const paths: Record<IconName, string> = {
   eye: 'M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8zM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z',
   check: 'M20 6L9 17l-5-5',
   'arrow-right': 'M5 12h14M12 5l7 7-7 7',
+  'arrow-left': 'M19 12H5M12 19l-7-7 7-7',
   menu: 'M3 12h18M3 6h18M3 18h18',
   x: 'M18 6L6 18M6 6l12 12',
   'chevron-down': 'M6 9l6 6 6-6',
+  'chevron-left': 'M15 18l-6-6 6-6',
+  'chevron-right': 'M9 18l6-6-6-6',
+  search: 'M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM21 21l-4.35-4.35',
+  link: 'M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71',
+  twitter: 'M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z',
+  linkedin: 'M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2zM4 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4z',
+  github: 'M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22',
+  globe: 'M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zM2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z',
+  facebook: 'M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z',
 };
 
 export function Icon({

@@ -20,6 +20,7 @@ export const navigation = {
   main: [
     { label: 'Features', href: '/#features' },
     { label: 'Pricing', href: '/pricing' },
+    { label: 'Blog', href: '/blog' },
   ],
   features: [
     { label: 'CRM', href: '/features/crm' },

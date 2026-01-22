@@ -1,9 +1,11 @@
 import { type MetadataRoute } from 'next';
+import { listPosts, listCategories, listAuthors } from '@/lib/blog';
 import { siteConfig, featurePageSlugs, industrySlugs } from '@/lib/constants';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = siteConfig.url;
 
+  // Static pages
   const staticPages: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
@@ -15,6 +17,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${baseUrl}/pricing`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/blog`,
+      lastModified: new Date(),
+      changeFrequency: 'daily',
       priority: 0.9,
     },
     {
@@ -67,5 +75,51 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }))
   );
 
-  return [...staticPages, ...featurePages, ...industriesHubPage, ...industryPages, ...industryFeaturePages];
+  // Blog pages (dynamic from API)
+  let blogPostPages: MetadataRoute.Sitemap = [];
+  let blogCategoryPages: MetadataRoute.Sitemap = [];
+  let blogAuthorPages: MetadataRoute.Sitemap = [];
+
+  try {
+    // Fetch all blog posts (paginate to get all)
+    const postsResponse = await listPosts({ limit: 50 });
+    blogPostPages = postsResponse.data.map((post) => ({
+      url: `${baseUrl}/blog/${post.slug}`,
+      lastModified: new Date(post.publishedAt),
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    }));
+
+    // Fetch all categories
+    const categoriesResponse = await listCategories();
+    blogCategoryPages = categoriesResponse.data.categories.map((category) => ({
+      url: `${baseUrl}/blog/category/${category.slug}`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.6,
+    }));
+
+    // Fetch all authors
+    const authorsResponse = await listAuthors();
+    blogAuthorPages = authorsResponse.data.authors.map((author) => ({
+      url: `${baseUrl}/blog/author/${author.slug}`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.5,
+    }));
+  } catch {
+    // If blog API fails, continue with other pages
+    console.error('Failed to fetch blog data for sitemap');
+  }
+
+  return [
+    ...staticPages,
+    ...featurePages,
+    ...industriesHubPage,
+    ...industryPages,
+    ...industryFeaturePages,
+    ...blogPostPages,
+    ...blogCategoryPages,
+    ...blogAuthorPages,
+  ];
 }

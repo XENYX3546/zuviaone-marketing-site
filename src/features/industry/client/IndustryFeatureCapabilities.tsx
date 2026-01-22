@@ -35,9 +35,9 @@ export function IndustryFeatureCapabilities({ industry: _industry, feature }: In
           </motion.div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {feature.solution.features.map((capability, index) => (
+            {feature.solution.features.map((capability) => (
               <motion.div
-                key={index}
+                key={capability.title}
                 variants={fadeInUp}
                 className="bg-white rounded-xl p-6 shadow-sm border border-neutral-200"
               >

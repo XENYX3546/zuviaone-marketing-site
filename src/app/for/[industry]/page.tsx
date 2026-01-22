@@ -96,6 +96,7 @@ function IndustrySchema({ industry }: { industry: typeof industries[string] }) {
   return (
     <script
       type="application/ld+json"
+      // eslint-disable-next-line react/no-danger -- JSON-LD structured data
       dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
     />
   );

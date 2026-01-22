@@ -144,6 +144,7 @@ function OrganizationSchema() {
   return (
     <script
       type="application/ld+json"
+      // eslint-disable-next-line react/no-danger -- JSON-LD structured data
       dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
     />
   );
@@ -165,6 +166,7 @@ function WebSiteSchema() {
   return (
     <script
       type="application/ld+json"
+      // eslint-disable-next-line react/no-danger -- JSON-LD structured data
       dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
     />
   );
@@ -208,6 +210,7 @@ function SoftwareApplicationSchema() {
   return (
     <script
       type="application/ld+json"
+      // eslint-disable-next-line react/no-danger -- JSON-LD structured data
       dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
     />
   );

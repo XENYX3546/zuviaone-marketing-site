@@ -31,9 +31,9 @@ export function BenefitsSection({ title, description, items }: BenefitsSectionPr
           viewport={{ once: true }}
           className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto"
         >
-          {items.map((item, index) => (
+          {items.map((item) => (
             <motion.div
-              key={index}
+              key={item.title}
               variants={fadeInUp}
               className="flex gap-4 bg-white rounded-xl p-6 border border-neutral-200 shadow-sm"
             >

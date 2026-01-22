@@ -34,9 +34,9 @@ export function IndustryFeaturePainPoints({ industry: _industry, feature }: Indu
           </motion.div>
 
           <div className="grid gap-6 max-w-4xl mx-auto">
-            {items.map((item, index) => (
+            {items.map((item) => (
               <motion.div
-                key={index}
+                key={item.problem}
                 variants={fadeInUp}
                 className="grid md:grid-cols-2 gap-4"
               >

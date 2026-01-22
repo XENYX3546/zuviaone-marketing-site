@@ -36,9 +36,9 @@ export function ProblemSolutionSection({
             viewport={{ once: true }}
             className="space-y-4"
           >
-            {items.map((item, index) => (
+            {items.map((item) => (
               <motion.div
-                key={index}
+                key={item.problem}
                 variants={fadeInUp}
                 className="grid md:grid-cols-2 gap-4 bg-neutral-800/50 rounded-xl p-5 border border-neutral-700"
               >

@@ -21,8 +21,8 @@ export function PricingFAQ() {
         </AnimatedSection>
 
         <div className="max-w-2xl mx-auto">
-          {pricingFAQs.map((faq, index) => (
-            <FAQItem key={index} faq={faq} />
+          {pricingFAQs.map((faq) => (
+            <FAQItem key={faq.question} faq={faq} />
           ))}
         </div>
       </Container>

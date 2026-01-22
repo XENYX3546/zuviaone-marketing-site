@@ -28,9 +28,9 @@ export function IndustryFeatureBenefits({ industry, content }: IndustryFeatureBe
           </motion.div>
 
           <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            {content.benefits.map((benefit, index) => (
+            {content.benefits.map((benefit) => (
               <motion.div
-                key={index}
+                key={benefit}
                 variants={fadeInUp}
                 className="flex items-start gap-4 bg-white rounded-xl p-6 shadow-sm border border-neutral-200"
               >

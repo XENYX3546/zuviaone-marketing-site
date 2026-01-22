@@ -29,9 +29,9 @@ export function UseCasesSection({ title, items }: UseCasesSectionProps) {
           viewport={{ once: true }}
           className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto"
         >
-          {items.map((item, index) => (
+          {items.map((item) => (
             <motion.div
-              key={index}
+              key={item.industry}
               variants={fadeInUp}
               className="text-center p-6 rounded-xl border border-neutral-200 bg-neutral-50"
             >
