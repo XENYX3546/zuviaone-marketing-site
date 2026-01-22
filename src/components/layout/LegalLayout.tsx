@@ -3,6 +3,9 @@ import { Container, Section } from '@/components/ui';
 import { Header } from './Header';
 import { Footer } from './Footer';
 
+// Import legal-specific styles only for legal pages
+import '@/app/legal.css';
+
 type LegalLayoutProps = {
   children: ReactNode;
   title: string;

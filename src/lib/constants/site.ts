@@ -20,8 +20,6 @@ export const navigation = {
   main: [
     { label: 'Features', href: '/#features' },
     { label: 'Pricing', href: '/pricing' },
-    { label: 'About', href: '/about' },
-    { label: 'Contact', href: '/contact' },
   ],
   features: [
     { label: 'CRM', href: '/features/crm' },

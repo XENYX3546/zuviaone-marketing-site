@@ -1,6 +1,10 @@
 // Animation presets for framer-motion - subtle and professional
+// Supports prefers-reduced-motion for accessibility
 
 import { type Variants } from 'framer-motion';
+
+// Reduced motion variants - instant transitions with no movement
+const reducedMotionTransition = { duration: 0.01 };
 
 export const fadeIn: Variants = {
   hidden: { opacity: 0 },
@@ -40,5 +44,36 @@ export const slideInRight: Variants = {
   visible: { opacity: 1, x: 0, transition: { duration: 0.5, ease: 'easeOut' } },
 };
 
+// Reduced motion variants - fade only, no movement
+export const fadeInReduced: Variants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: reducedMotionTransition },
+};
+
+export const staggerContainerReduced: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0, delayChildren: 0 },
+  },
+};
+
+// Helper to get motion-safe variants
+export function getMotionSafeVariants(
+  variants: Variants,
+  prefersReducedMotion: boolean
+): Variants {
+  if (!prefersReducedMotion) return variants;
+
+  // Return reduced motion version - just fade, no transforms
+  return {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: reducedMotionTransition },
+  };
+}
+
 // Viewport settings for scroll-triggered animations
 export const viewportOnce = { once: true, margin: '-100px' } as const;
+
+// Reduced motion viewport - no margin for faster trigger
+export const viewportOnceReduced = { once: true, margin: '0px' } as const;

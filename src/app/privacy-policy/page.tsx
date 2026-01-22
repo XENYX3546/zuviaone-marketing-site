@@ -5,6 +5,13 @@ import { siteConfig } from '@/lib/constants';
 export const metadata: Metadata = {
   title: 'Privacy Policy',
   description: 'Privacy Policy for ZuviaOne - how we collect, use, and protect your data.',
+  alternates: {
+    canonical: `${siteConfig.url}/privacy-policy`,
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function PrivacyPolicyPage() {

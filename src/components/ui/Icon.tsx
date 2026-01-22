@@ -10,6 +10,10 @@ type IconProps = {
   name: IconName;
   size?: number;
   className?: string;
+  /** Accessible label for screen readers. If provided, icon is treated as meaningful content. */
+  'aria-label'?: string;
+  /** Set to true if icon is purely decorative (default: true if no aria-label) */
+  'aria-hidden'?: boolean;
 };
 
 const paths: Record<IconName, string> = {
@@ -38,7 +42,16 @@ const paths: Record<IconName, string> = {
   'chevron-down': 'M6 9l6 6 6-6',
 };
 
-export function Icon({ name, size = 24, className }: IconProps) {
+export function Icon({
+  name,
+  size = 24,
+  className,
+  'aria-label': ariaLabel,
+  'aria-hidden': ariaHidden,
+}: IconProps) {
+  // If no aria-label is provided, treat icon as decorative
+  const isDecorative = ariaHidden ?? !ariaLabel;
+
   return (
     <svg
       width={size}
@@ -50,6 +63,10 @@ export function Icon({ name, size = 24, className }: IconProps) {
       strokeLinecap="round"
       strokeLinejoin="round"
       className={cn('flex-shrink-0', className)}
+      aria-hidden={isDecorative}
+      aria-label={ariaLabel}
+      role={ariaLabel ? 'img' : undefined}
+      focusable="false"
     >
       <path d={paths[name]} />
     </svg>

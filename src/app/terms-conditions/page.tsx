@@ -5,6 +5,13 @@ import { siteConfig } from '@/lib/constants';
 export const metadata: Metadata = {
   title: 'Terms & Conditions',
   description: 'Terms and Conditions for using ZuviaOne services.',
+  alternates: {
+    canonical: `${siteConfig.url}/terms-conditions`,
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function TermsPage() {
