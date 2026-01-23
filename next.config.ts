@@ -14,7 +14,7 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'polished-forest-1255.fly.storage.tigris.dev',
-        pathname: '/blog-media/**',
+        pathname: '/**',
       },
     ],
   },
