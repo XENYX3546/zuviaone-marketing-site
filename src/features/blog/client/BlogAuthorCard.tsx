@@ -11,6 +11,7 @@ type BlogAuthorCardProps = {
   variant?: 'inline' | 'card' | 'full';
   showSocial?: boolean;
   linkToProfile?: boolean;
+  light?: boolean;
 };
 
 function hasSocialLinks(author: PublicAuthor | PublicAuthorWithCount): author is PublicAuthorWithCount {
@@ -64,6 +65,7 @@ export function BlogAuthorCard({
   variant = 'inline',
   showSocial = false,
   linkToProfile = true,
+  light = false,
 }: BlogAuthorCardProps) {
   const content = (
     <>
@@ -74,22 +76,22 @@ export function BlogAuthorCard({
           alt={author.displayName}
           width={getAvatarSize(variant)}
           height={getAvatarSize(variant)}
-          className="rounded-full flex-shrink-0"
+          className={`rounded-full flex-shrink-0 ${light ? 'ring-2 ring-white/30' : ''}`}
         />
       )}
 
       {/* Info */}
       <div className={variant === 'full' ? 'flex-1' : ''}>
         <span
-          className={`font-medium text-neutral-900 ${
-            linkToProfile ? 'group-hover:text-blue-600 transition-colors' : ''
-          } ${variant === 'full' ? 'text-lg' : ''}`}
+          className={`font-medium ${light ? 'text-white' : 'text-neutral-900'} ${
+            linkToProfile && !light ? 'group-hover:text-blue-600 transition-colors' : ''
+          } ${linkToProfile && light ? 'group-hover:text-white/80 transition-colors' : ''} ${variant === 'full' ? 'text-lg' : ''}`}
         >
           {author.displayName}
         </span>
 
         {(author.jobTitle || author.company) && (
-          <p className="text-sm text-neutral-500">
+          <p className={`text-sm ${light ? 'text-white/60' : 'text-neutral-500'}`}>
             {author.jobTitle}
             {author.jobTitle && author.company && ' at '}
             {author.company}
@@ -97,11 +99,11 @@ export function BlogAuthorCard({
         )}
 
         {variant === 'full' && author.bio && (
-          <p className="mt-2 text-neutral-600">{author.bio}</p>
+          <p className={`mt-2 ${light ? 'text-white/70' : 'text-neutral-600'}`}>{author.bio}</p>
         )}
 
         {hasPostCount(author) && variant !== 'inline' && (
-          <p className="text-sm text-neutral-500 mt-1">
+          <p className={`text-sm mt-1 ${light ? 'text-white/60' : 'text-neutral-500'}`}>
             {author.postCount} {author.postCount === 1 ? 'article' : 'articles'}
           </p>
         )}
@@ -117,7 +119,7 @@ export function BlogAuthorCard({
   );
 
   const className = `group flex items-center gap-3 ${
-    variant === 'card' ? 'p-4 bg-neutral-50 rounded-xl' : ''
+    variant === 'card' ? `p-4 rounded-xl ${light ? 'bg-white/10' : 'bg-neutral-50'}` : ''
   } ${variant === 'full' ? 'flex-col sm:flex-row sm:items-start gap-4' : ''}`;
 
   if (linkToProfile) {

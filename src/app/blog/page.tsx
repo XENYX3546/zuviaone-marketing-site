@@ -1,8 +1,8 @@
 import { Suspense } from 'react';
 import { LandingLayout } from '@/components/layout';
-import { Container, Section } from '@/components/ui';
-import { BlogHero, BlogSearch, BlogCategoryList } from '@/features/blog/client';
-import { BlogPostGrid, BlogSidebar } from '@/features/blog/server';
+import { Container } from '@/components/ui';
+import { BlogHero, BlogSearch, BlogCategoryList, BlogSidebarCTA } from '@/features/blog/client';
+import { BlogPostGrid } from '@/features/blog/server';
 import { listCategories } from '@/lib/blog';
 import { siteConfig } from '@/lib/constants';
 import type { Metadata } from 'next';
@@ -107,7 +107,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
     <LandingLayout>
       <BlogListSchema />
 
-      {/* Hero */}
+      {/* Hero with Search */}
       <BlogHero
         title={pageTitle}
         description={pageDescription}
@@ -115,61 +115,48 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
           { label: 'Home', href: '/' },
           { label: 'Blog' },
         ]}
-      />
+      >
+        <BlogSearch defaultValue={searchQuery} />
+      </BlogHero>
 
       {/* Main Content */}
-      <Section>
+      <section className="py-8">
         <Container>
-          <div className="lg:grid lg:grid-cols-[1fr_300px] lg:gap-12">
-            {/* Main Column */}
-            <div>
-              {/* Search & Filters */}
-              <div className="mb-8 space-y-4">
-                <BlogSearch defaultValue={searchQuery} />
-                <BlogCategoryList categories={categories} variant="pills" />
-              </div>
+          {/* Category Filters */}
+          <div className="mb-8">
+            <BlogCategoryList categories={categories} variant="pills" />
+          </div>
 
-              {/* Posts Grid */}
-              <Suspense
-                fallback={
-                  <div className="grid sm:grid-cols-2 lg:grid-cols-2 gap-6">
-                    {Array.from({ length: 6 }).map((_, i) => (
-                      // eslint-disable-next-line react/no-array-index-key -- Static skeleton loaders
-                      <div key={`skeleton-${i}`} className="bg-neutral-100 rounded-xl h-80 animate-pulse" />
-                    ))}
-                  </div>
-                }
-              >
-                <BlogPostGrid
-                  params={{
-                    page,
-                    q: searchQuery,
-                    tag,
-                    limit: 12,
-                  }}
-                  basePath="/blog"
-                />
-              </Suspense>
-            </div>
+          <div className="lg:grid lg:grid-cols-[1fr_320px] lg:gap-12">
+            {/* Posts Grid */}
+            <Suspense
+              fallback={
+                <div className="grid sm:grid-cols-2 gap-5">
+                  {Array.from({ length: 6 }).map((_, i) => (
+                    // eslint-disable-next-line react/no-array-index-key -- Static skeleton loaders
+                    <div key={`skeleton-${i}`} className="bg-neutral-100 rounded-2xl aspect-[4/3] animate-pulse" />
+                  ))}
+                </div>
+              }
+            >
+              <BlogPostGrid
+                params={{
+                  page,
+                  q: searchQuery,
+                  tag,
+                  limit: 12,
+                }}
+                basePath="/blog"
+              />
+            </Suspense>
 
             {/* Sidebar */}
-            <div className="hidden lg:block">
-              <div className="sticky top-24">
-                <Suspense
-                  fallback={
-                    <div className="space-y-6">
-                      <div className="bg-neutral-100 rounded-xl h-48 animate-pulse" />
-                      <div className="bg-neutral-100 rounded-xl h-64 animate-pulse" />
-                    </div>
-                  }
-                >
-                  <BlogSidebar showCategories={false} />
-                </Suspense>
-              </div>
-            </div>
+            <aside className="hidden lg:block">
+              <BlogSidebarCTA />
+            </aside>
           </div>
         </Container>
-      </Section>
+      </section>
     </LandingLayout>
   );
 }

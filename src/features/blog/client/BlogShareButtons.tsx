@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { Icon } from '@/components/ui';
 import { siteConfig } from '@/lib/constants';
 
@@ -7,9 +8,11 @@ type BlogShareButtonsProps = {
   title: string;
   slug: string;
   variant?: 'horizontal' | 'vertical';
+  light?: boolean;
 };
 
-export function BlogShareButtons({ title, slug, variant = 'horizontal' }: BlogShareButtonsProps) {
+export function BlogShareButtons({ title, slug, variant = 'horizontal', light = false }: BlogShareButtonsProps) {
+  const [copied, setCopied] = useState(false);
   const url = `${siteConfig.url}/blog/${slug}`;
   const encodedUrl = encodeURIComponent(url);
   const encodedTitle = encodeURIComponent(title);
@@ -38,7 +41,8 @@ export function BlogShareButtons({ title, slug, variant = 'horizontal' }: BlogSh
   const handleCopyLink = async () => {
     try {
       await navigator.clipboard.writeText(url);
-      // Could add toast notification here
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
     } catch {
       // Fallback for older browsers
       const textarea = document.createElement('textarea');
@@ -47,8 +51,14 @@ export function BlogShareButtons({ title, slug, variant = 'horizontal' }: BlogSh
       textarea.select();
       document.execCommand('copy');
       document.body.removeChild(textarea);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
     }
   };
+
+  const baseButtonStyles = light
+    ? 'border-white/30 text-white/70 hover:bg-white/20 hover:text-white hover:border-white/50'
+    : 'border-neutral-200 text-neutral-500';
 
   return (
     <div
@@ -56,7 +66,7 @@ export function BlogShareButtons({ title, slug, variant = 'horizontal' }: BlogSh
         variant === 'vertical' ? 'flex-col' : 'flex-row'
       }`}
     >
-      <span className="text-sm text-neutral-500 mr-1">Share:</span>
+      <span className={`text-sm mr-1 ${light ? 'text-white/70' : 'text-neutral-500'}`}>Share:</span>
 
       {shareLinks.map((link) => (
         <a
@@ -64,7 +74,7 @@ export function BlogShareButtons({ title, slug, variant = 'horizontal' }: BlogSh
           href={link.href}
           target="_blank"
           rel="noopener noreferrer"
-          className={`w-9 h-9 flex items-center justify-center rounded-lg border border-neutral-200 text-neutral-500 transition-all ${link.color}`}
+          className={`w-9 h-9 flex items-center justify-center rounded-lg border transition-all ${baseButtonStyles} ${!light ? link.color : ''}`}
           aria-label={`Share on ${link.name}`}
         >
           <Icon name={link.icon} size={18} />
@@ -73,10 +83,14 @@ export function BlogShareButtons({ title, slug, variant = 'horizontal' }: BlogSh
 
       <button
         onClick={handleCopyLink}
-        className="w-9 h-9 flex items-center justify-center rounded-lg border border-neutral-200 text-neutral-500 hover:bg-neutral-100 hover:text-neutral-700 transition-all"
-        aria-label="Copy link"
+        className={`w-9 h-9 flex items-center justify-center rounded-lg border transition-all ${
+          copied
+            ? 'bg-green-500 border-green-500 text-white'
+            : baseButtonStyles
+        }`}
+        aria-label={copied ? 'Link copied' : 'Copy link'}
       >
-        <Icon name="link" size={18} />
+        <Icon name={copied ? 'check' : 'link'} size={18} />
       </button>
     </div>
   );

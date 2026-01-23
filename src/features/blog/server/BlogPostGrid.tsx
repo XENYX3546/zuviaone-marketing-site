@@ -80,7 +80,7 @@ export async function BlogPostGrid({
   return (
     <div>
       {/* Post Grid */}
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid sm:grid-cols-2 gap-5">
         {/* Featured Post (larger) */}
         {featuredPost && <BlogPostCard post={featuredPost} featured priority />}
 
@@ -92,7 +92,7 @@ export async function BlogPostGrid({
 
       {/* Pagination */}
       {pagination.totalPages > 1 && (
-        <div className="mt-12">
+        <div className="mt-10">
           <BlogPagination
             pagination={pagination}
             basePath={basePath}

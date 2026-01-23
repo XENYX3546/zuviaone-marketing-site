@@ -1,47 +1,35 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { Container, Section, Breadcrumbs } from '@/components/ui';
-import { fadeInUp, staggerContainer, viewportOnce } from '@/lib/utils/animations';
+import { Container, Breadcrumbs } from '@/components/ui';
 import type { BreadcrumbItem } from '@/components/ui';
 
 type BlogHeroProps = {
   title: string;
   description?: string;
   breadcrumbs?: BreadcrumbItem[];
+  children?: React.ReactNode;
 };
 
-export function BlogHero({ title, description, breadcrumbs }: BlogHeroProps) {
+export function BlogHero({ title, description, breadcrumbs, children }: BlogHeroProps) {
   return (
-    <Section className="bg-gradient-to-b from-blue-50/50 to-white pt-8 pb-12">
+    <section className="bg-gradient-to-b from-blue-50/50 to-white pt-6 pb-8">
       <Container>
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          animate="visible"
-          viewport={viewportOnce}
-          className="max-w-3xl"
-        >
-          {breadcrumbs && breadcrumbs.length > 0 && (
-            <motion.div variants={fadeInUp} className="mb-6">
-              <Breadcrumbs items={breadcrumbs} />
-            </motion.div>
-          )}
+        {breadcrumbs && breadcrumbs.length > 0 && (
+          <Breadcrumbs items={breadcrumbs} className="mb-4" />
+        )}
 
-          <motion.h1
-            variants={fadeInUp}
-            className="text-4xl md:text-5xl font-bold text-neutral-900 tracking-tight"
-          >
-            {title}
-          </motion.h1>
-
-          {description && (
-            <motion.p variants={fadeInUp} className="mt-4 text-lg text-neutral-600">
-              {description}
-            </motion.p>
-          )}
-        </motion.div>
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+          <div>
+            <h1 className="text-3xl md:text-4xl font-bold text-neutral-900 tracking-tight">
+              {title}
+            </h1>
+            {description && (
+              <p className="mt-2 text-neutral-600 max-w-xl">{description}</p>
+            )}
+          </div>
+          {children && <div className="flex-shrink-0">{children}</div>}
+        </div>
       </Container>
-    </Section>
+    </section>
   );
 }

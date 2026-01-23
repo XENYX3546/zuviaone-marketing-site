@@ -10,3 +10,6 @@ export { BlogTagList } from './BlogTagList';
 export { BlogShareButtons } from './BlogShareButtons';
 export { BlogHero } from './BlogHero';
 export { BlogSearch } from './BlogSearch';
+export { BlogSidebarCTA } from './BlogSidebarCTA';
+export { AuthorHeroBackground, DynamicAvatar } from './AuthorHeroBackground';
+export { ShareProfileButton } from './ShareProfileButton';

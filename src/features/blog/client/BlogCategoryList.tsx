@@ -8,7 +8,7 @@ import type { PublicCategory, PublicCategoryWithCount } from '@/lib/blog';
 type BlogCategoryListProps = {
   categories: PublicCategory[] | PublicCategoryWithCount[];
   activeSlug?: string;
-  variant?: 'inline' | 'list' | 'pills';
+  variant?: 'inline' | 'list' | 'pills' | 'light';
   showCount?: boolean;
 };
 
@@ -98,6 +98,23 @@ export function BlogCategoryList({
           </li>
         ))}
       </ul>
+    );
+  }
+
+  // light variant (for dark backgrounds)
+  if (variant === 'light') {
+    return (
+      <div className="flex flex-wrap items-center gap-2">
+        {categories.map((category) => (
+          <Link
+            key={category.id}
+            href={blogPaths.category(category.slug)}
+            className="px-3 py-1 text-sm font-medium rounded-full bg-white/20 text-white hover:bg-white/30 transition-colors"
+          >
+            {category.name}
+          </Link>
+        ))}
+      </div>
     );
   }
 

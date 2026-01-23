@@ -10,6 +10,13 @@ const nextConfig: NextConfig = {
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
     imageSizes: [16, 32, 48, 64, 96, 128, 256],
     minimumCacheTTL: 31536000, // 1 year cache for optimized images
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'polished-forest-1255.fly.storage.tigris.dev',
+        pathname: '/blog-media/**',
+      },
+    ],
   },
 
   // Enable compression

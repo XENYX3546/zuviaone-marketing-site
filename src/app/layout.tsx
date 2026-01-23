@@ -54,6 +54,7 @@ export const metadata: Metadata = {
     canonical: siteConfig.url,
     types: {
       'application/rss+xml': `${siteConfig.url}/feed.xml`,
+      'application/atom+xml': `${siteConfig.url}/atom.xml`,
     },
   },
   openGraph: {
@@ -111,6 +112,9 @@ export default function RootLayout({
         {/* Preconnect to external domains for performance */}
         <link rel="preconnect" href="https://app.zuviaone.com" />
         <link rel="dns-prefetch" href="https://app.zuviaone.com" />
+        {/* Preconnect to image CDN for faster blog images */}
+        <link rel="preconnect" href="https://polished-forest-1255.fly.storage.tigris.dev" />
+        <link rel="dns-prefetch" href="https://polished-forest-1255.fly.storage.tigris.dev" />
 
         {/* Structured Data */}
         <OrganizationSchema />
@@ -167,6 +171,15 @@ function WebSiteSchema() {
     publisher: {
       '@type': 'Organization',
       name: siteConfig.name,
+    },
+    // SearchAction enables sitelinks search box in Google results
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: `${siteConfig.url}/blog?q={search_term_string}`,
+      },
+      'query-input': 'required name=search_term_string',
     },
   };
 

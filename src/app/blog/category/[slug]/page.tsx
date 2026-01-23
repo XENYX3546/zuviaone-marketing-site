@@ -1,9 +1,9 @@
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 import { LandingLayout } from '@/components/layout';
-import { Container, Section } from '@/components/ui';
-import { BlogHero, BlogCategoryList } from '@/features/blog/client';
-import { BlogPostGrid, BlogSidebar } from '@/features/blog/server';
+import { Container } from '@/components/ui';
+import { BlogHero, BlogCategoryList, BlogSidebarCTA } from '@/features/blog/client';
+import { BlogPostGrid } from '@/features/blog/server';
 import { listCategories, listPosts } from '@/lib/blog';
 import { siteConfig } from '@/lib/constants';
 import type { Metadata } from 'next';
@@ -166,7 +166,7 @@ export default async function CategoryPage({ params, searchParams }: Props) {
         title={category.name}
         description={
           category.description ||
-          `Browse ${postCount} ${postCount === 1 ? 'article' : 'articles'} about ${category.name.toLowerCase()}.`
+          `${postCount} ${postCount === 1 ? 'article' : 'articles'} about ${category.name.toLowerCase()}.`
         }
         breadcrumbs={[
           { label: 'Home', href: '/' },
@@ -176,61 +176,47 @@ export default async function CategoryPage({ params, searchParams }: Props) {
       />
 
       {/* Main Content */}
-      <Section>
+      <section className="py-8">
         <Container>
-          <div className="lg:grid lg:grid-cols-[1fr_300px] lg:gap-12">
-            {/* Main Column */}
-            <div>
-              {/* Category Pills */}
-              <div className="mb-8">
-                <BlogCategoryList
-                  categories={categories}
-                  activeSlug={slug}
-                  variant="pills"
-                />
-              </div>
+          {/* Category Filters */}
+          <div className="mb-8">
+            <BlogCategoryList
+              categories={categories}
+              activeSlug={slug}
+              variant="pills"
+            />
+          </div>
 
-              {/* Posts Grid */}
-              <Suspense
-                fallback={
-                  <div className="grid sm:grid-cols-2 gap-6">
-                    {Array.from({ length: 6 }).map((_, i) => (
-                      // eslint-disable-next-line react/no-array-index-key -- Static skeleton loaders
-                      <div key={`skeleton-${i}`} className="bg-neutral-100 rounded-xl h-80 animate-pulse" />
-                    ))}
-                  </div>
-                }
-              >
-                <BlogPostGrid
-                  params={{
-                    page,
-                    category: slug,
-                    limit: 12,
-                  }}
-                  basePath={`/blog/category/${slug}`}
-                  showFeaturedFirst={false}
-                />
-              </Suspense>
-            </div>
+          <div className="lg:grid lg:grid-cols-[1fr_320px] lg:gap-12">
+            {/* Posts Grid */}
+            <Suspense
+              fallback={
+                <div className="grid sm:grid-cols-2 gap-5">
+                  {Array.from({ length: 6 }).map((_, i) => (
+                    // eslint-disable-next-line react/no-array-index-key -- Static skeleton loaders
+                    <div key={`skeleton-${i}`} className="bg-neutral-100 rounded-2xl aspect-[4/3] animate-pulse" />
+                  ))}
+                </div>
+              }
+            >
+              <BlogPostGrid
+                params={{
+                  page,
+                  category: slug,
+                  limit: 12,
+                }}
+                basePath={`/blog/category/${slug}`}
+                showFeaturedFirst={false}
+              />
+            </Suspense>
 
-            {/* Sidebar */}
-            <div className="hidden lg:block">
-              <div className="sticky top-24">
-                <Suspense
-                  fallback={
-                    <div className="space-y-6">
-                      <div className="bg-neutral-100 rounded-xl h-48 animate-pulse" />
-                      <div className="bg-neutral-100 rounded-xl h-64 animate-pulse" />
-                    </div>
-                  }
-                >
-                  <BlogSidebar activeCategorySlug={slug} />
-                </Suspense>
-              </div>
-            </div>
+            {/* Sidebar with contextual CTA */}
+            <aside className="hidden lg:block">
+              <BlogSidebarCTA categories={[category]} />
+            </aside>
           </div>
         </Container>
-      </Section>
+      </section>
     </LandingLayout>
   );
 }
