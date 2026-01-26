@@ -22,9 +22,9 @@ export function Footer() {
     <footer className="bg-neutral-50 border-t border-neutral-200">
       <Container className="py-12 md:py-16">
         {/* Main footer grid */}
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8">
           {/* Brand */}
-          <div className="col-span-2 md:col-span-1">
+          <div className="col-span-2">
             <Link href="/" className="flex items-center gap-2 mb-4">
               <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-sm">Z</span>
@@ -41,6 +41,18 @@ export function Footer() {
           {/* Features */}
           <FooterSection title="Features" links={navigation.features} />
 
+          {/* Solutions */}
+          <FooterSection title="Solutions" links={navigation.solutions} />
+
+          {/* Integrations */}
+          <FooterSection title="Integrations" links={navigation.integrations} />
+
+          {/* Compare */}
+          <FooterSection title="Compare" links={navigation.compare} />
+        </div>
+
+        {/* Secondary footer grid */}
+        <div className="mt-8 pt-8 border-t border-neutral-200 grid grid-cols-2 md:grid-cols-4 gap-8">
           {/* Industries */}
           <FooterSection
             title="Industries"
@@ -50,8 +62,15 @@ export function Footer() {
             viewAllLabel="All industries"
           />
 
+          {/* Templates */}
+          <FooterSection title="Templates" links={navigation.templates} />
+
           {/* Company */}
-          <FooterSection title="Company" links={[...navigation.main, { label: 'Pricing', href: '/pricing' }]} />
+          <FooterSection title="Company" links={[
+            { label: 'Home', href: '/' },
+            { label: 'Pricing', href: '/pricing' },
+            { label: 'Blog', href: '/blog' },
+          ]} />
 
           {/* Legal */}
           <FooterSection title="Legal" links={navigation.legal} />
