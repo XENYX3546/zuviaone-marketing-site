@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import { LandingLayout } from '@/components/layout';
-import { Container, Section, Button, Badge, Icon } from '@/components/ui';
-import { siteConfig, ctaLinks } from '@/lib/constants';
+import { Container, Section, Badge, Icon } from '@/components/ui';
+import { siteConfig } from '@/lib/constants';
 import { getProblem, problemSlugs } from '@/lib/data';
 import type { Metadata } from 'next';
 
@@ -70,14 +70,6 @@ export default async function ProblemPage({ params }: Props) {
                 <span>{problem.hero.stat.label}</span>
               </div>
             )}
-            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
-              <Button href={ctaLinks.signUp} size="lg">
-                Solve This Now
-              </Button>
-              <Button href={ctaLinks.demo} variant="outline" size="lg">
-                See How It Works
-              </Button>
-            </div>
           </div>
         </Container>
       </Section>
@@ -200,35 +192,6 @@ export default async function ProblemPage({ params }: Props) {
         </Container>
       </Section>
 
-      {/* CTA */}
-      <Section className="bg-blue-600 text-white">
-        <Container>
-          <div className="max-w-2xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold">
-              {problem.cta.title}
-            </h2>
-            <p className="mt-4 text-lg text-blue-100">
-              {problem.cta.description}
-            </p>
-            {problem.cta.urgency && (
-              <p className="mt-4 text-blue-200 italic">
-                {problem.cta.urgency}
-              </p>
-            )}
-            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
-              <Button href={ctaLinks.signUp} size="lg" className="bg-white text-blue-600 hover:bg-blue-50">
-                Start Free Trial
-              </Button>
-              <Button href={ctaLinks.demo} variant="outline" size="lg" className="border-white text-white hover:bg-blue-500">
-                Book a Demo
-              </Button>
-            </div>
-            <p className="mt-4 text-sm text-blue-200">
-              No credit card required. 14-day free trial.
-            </p>
-          </div>
-        </Container>
-      </Section>
     </LandingLayout>
   );
 }

@@ -86,19 +86,6 @@ export async function BlogSidebar({
         </div>
       )}
 
-      {/* Newsletter CTA */}
-      <div className="bg-blue-600 rounded-xl p-6 text-white">
-        <h3 className="font-semibold mb-2">Stay Updated</h3>
-        <p className="text-sm text-blue-100 mb-4">
-          Get the latest articles and product updates delivered to your inbox.
-        </p>
-        <Link
-          href="/pricing"
-          className="inline-flex items-center justify-center w-full px-4 py-2 bg-white text-blue-600 font-medium rounded-lg hover:bg-blue-50 transition-colors"
-        >
-          Get Started Free
-        </Link>
-      </div>
     </aside>
   );
 }

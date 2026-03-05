@@ -1,8 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Container, Section, Button, Badge } from '@/components/ui';
-import { ctaLinks } from '@/lib/constants';
+import { Container, Section, Badge } from '@/components/ui';
 import { fadeInUp, staggerContainer } from '@/lib/utils/animations';
 
 type Stat = { value: string; label: string };
@@ -50,22 +49,6 @@ export function FeatureLandingHero({
             className="mt-6 text-lg md:text-xl text-neutral-600 max-w-2xl mx-auto"
           >
             {description}
-          </motion.p>
-
-          <motion.div
-            variants={fadeInUp}
-            className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3"
-          >
-            <Button href={ctaLinks.signUp} size="lg">
-              Start Free Trial
-            </Button>
-            <Button href={ctaLinks.demo} variant="outline" size="lg">
-              Book a Demo
-            </Button>
-          </motion.div>
-
-          <motion.p variants={fadeInUp} className="mt-4 text-sm text-neutral-500">
-            No credit card required. 14-day free trial.
           </motion.p>
 
           {stats && stats.length > 0 && (

@@ -2,8 +2,8 @@
 
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { Container, Section, Button, Icon } from '@/components/ui';
-import { pricingPlans, ctaLinks, type PricingPlan } from '@/lib/constants';
+import { Container, Section, Icon } from '@/components/ui';
+import { pricingPlans, type PricingPlan } from '@/lib/constants';
 import { cn } from '@/lib/utils';
 import { staggerContainer, fadeInUp } from '@/lib/utils/animations';
 import { PricingToggle } from './PricingToggle';
@@ -87,13 +87,6 @@ function PricingCard({
         ))}
       </ul>
 
-      <Button
-        href={isEnterprise ? '/contact' : ctaLinks.signUp}
-        variant={plan.highlighted ? 'primary' : 'outline'}
-        className="w-full"
-      >
-        {plan.cta}
-      </Button>
     </motion.div>
   );
 }

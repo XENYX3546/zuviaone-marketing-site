@@ -1,6 +1,6 @@
 import { LandingLayout } from '@/components/layout';
-import { Container, Section, Button, Icon } from '@/components/ui';
-import { siteConfig, ctaLinks, navigation } from '@/lib/constants';
+import { Container, Section, Icon } from '@/components/ui';
+import { siteConfig, navigation } from '@/lib/constants';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 
@@ -117,24 +117,6 @@ export default function FeaturesPage() {
         </Container>
       </Section>
 
-      <Section className="bg-blue-600 text-white">
-        <Container>
-          <div className="max-w-2xl mx-auto text-center">
-            <h2 className="text-3xl font-bold">All features included</h2>
-            <p className="mt-4 text-blue-100">
-              No feature tiers. No per-user pricing. One price, everything included.
-            </p>
-            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
-              <Button href={ctaLinks.signUp} size="lg" className="bg-white text-blue-600 hover:bg-blue-50">
-                Start Free Trial
-              </Button>
-              <Button href="/pricing" variant="outline" size="lg" className="border-white text-white hover:bg-blue-500">
-                See Pricing
-              </Button>
-            </div>
-          </div>
-        </Container>
-      </Section>
     </LandingLayout>
   );
 }

@@ -1,6 +1,6 @@
 import { LandingLayout } from '@/components/layout';
-import { Container, Section, Button, Icon } from '@/components/ui';
-import { siteConfig, ctaLinks } from '@/lib/constants';
+import { Container, Section, Icon } from '@/components/ui';
+import { siteConfig } from '@/lib/constants';
 import { problems, problemSlugs } from '@/lib/data';
 import Link from 'next/link';
 import type { Metadata } from 'next';
@@ -67,21 +67,6 @@ export default function SolutionsPage() {
         </Container>
       </Section>
 
-      <Section className="bg-blue-600 text-white">
-        <Container>
-          <div className="max-w-2xl mx-auto text-center">
-            <h2 className="text-3xl font-bold">Ready to solve your challenges?</h2>
-            <p className="mt-4 text-blue-100">
-              Start your free trial and see results in the first week.
-            </p>
-            <div className="mt-8">
-              <Button href={ctaLinks.signUp} size="lg" className="bg-white text-blue-600 hover:bg-blue-50">
-                Start Free Trial
-              </Button>
-            </div>
-          </div>
-        </Container>
-      </Section>
     </LandingLayout>
   );
 }

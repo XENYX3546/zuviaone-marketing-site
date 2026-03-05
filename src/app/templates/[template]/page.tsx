@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import { LandingLayout } from '@/components/layout';
-import { Container, Section, Button, Badge, Icon } from '@/components/ui';
-import { siteConfig, ctaLinks } from '@/lib/constants';
+import { Container, Section, Badge, Icon } from '@/components/ui';
+import { siteConfig } from '@/lib/constants';
 import { getTemplate, templateSlugs } from '@/lib/data';
 import type { Metadata } from 'next';
 
@@ -64,14 +64,6 @@ export default async function TemplatePage({ params }: Props) {
             <p className="mt-6 text-lg md:text-xl text-neutral-600 max-w-2xl mx-auto">
               {template.hero.description}
             </p>
-            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
-              <Button href={ctaLinks.signUp} size="lg">
-                Use This Template
-              </Button>
-              <Button href={ctaLinks.demo} variant="outline" size="lg">
-                See Preview
-              </Button>
-            </div>
           </div>
         </Container>
       </Section>
@@ -184,30 +176,6 @@ export default async function TemplatePage({ params }: Props) {
         </Section>
       )}
 
-      {/* CTA */}
-      <Section className="bg-purple-600 text-white">
-        <Container>
-          <div className="max-w-2xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold">
-              {template.cta.title}
-            </h2>
-            <p className="mt-4 text-lg text-purple-100">
-              {template.cta.description}
-            </p>
-            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
-              <Button href={ctaLinks.signUp} size="lg" className="bg-white text-purple-600 hover:bg-purple-50">
-                Start Free Trial
-              </Button>
-              <Button href={ctaLinks.demo} variant="outline" size="lg" className="border-white text-white hover:bg-purple-500">
-                Book a Demo
-              </Button>
-            </div>
-            <p className="mt-4 text-sm text-purple-200">
-              No credit card required. 14-day free trial.
-            </p>
-          </div>
-        </Container>
-      </Section>
     </LandingLayout>
   );
 }

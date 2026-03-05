@@ -3,8 +3,8 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { useState } from 'react';
-import { Container, Button, Icon } from '@/components/ui';
-import { siteConfig, navigation, ctaLinks } from '@/lib/constants';
+import { Container, Icon } from '@/components/ui';
+import { siteConfig, navigation } from '@/lib/constants';
 import { cn } from '@/lib/utils';
 
 export function Header() {
@@ -22,15 +22,6 @@ export function Header() {
           </Link>
 
           <DesktopNav />
-
-          <div className="hidden md:flex items-center gap-3">
-            <Button href={ctaLinks.login} variant="ghost" size="sm">
-              Log in
-            </Button>
-            <Button href={ctaLinks.signUp} size="sm">
-              Get Started
-            </Button>
-          </div>
 
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -100,14 +91,6 @@ function MobileMenu({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
                 </li>
               ))}
             </ul>
-            <div className="mt-4 pt-4 border-t border-neutral-200 flex flex-col gap-2">
-              <Button href={ctaLinks.login} variant="outline" className="w-full">
-                Log in
-              </Button>
-              <Button href={ctaLinks.signUp} className="w-full">
-                Get Started
-              </Button>
-            </div>
           </Container>
         </motion.div>
       )}

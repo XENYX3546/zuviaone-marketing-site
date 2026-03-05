@@ -109,28 +109,6 @@ export default function IndustriesPage() {
         </Container>
       </Section>
 
-      {/* CTA */}
-      <Section className="bg-blue-600">
-        <Container>
-          <div className="text-center max-w-2xl mx-auto">
-            <h2 className="text-3xl font-bold text-white">
-              Don&apos;t see your industry?
-            </h2>
-            <p className="mt-4 text-blue-100">
-              ZuviaOne works for all service businesses. Start your free trial
-              and see how it fits your workflow.
-            </p>
-            <div className="mt-8">
-              <Link
-                href="/pricing"
-                className="inline-flex items-center justify-center px-6 py-3 bg-white text-blue-600 font-semibold rounded-lg hover:bg-blue-50 transition-colors"
-              >
-                View Pricing
-              </Link>
-            </div>
-          </div>
-        </Container>
-      </Section>
     </LandingLayout>
   );
 }

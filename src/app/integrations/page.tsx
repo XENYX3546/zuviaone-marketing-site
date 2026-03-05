@@ -1,6 +1,6 @@
 import { LandingLayout } from '@/components/layout';
-import { Container, Section, Button, Icon } from '@/components/ui';
-import { siteConfig, ctaLinks } from '@/lib/constants';
+import { Container, Section, Icon } from '@/components/ui';
+import { siteConfig } from '@/lib/constants';
 import { integrations, integrationSlugs } from '@/lib/data';
 import Link from 'next/link';
 import type { Metadata } from 'next';
@@ -91,24 +91,6 @@ export default function IntegrationsPage() {
         </Container>
       </Section>
 
-      <Section className="bg-neutral-900 text-white">
-        <Container>
-          <div className="max-w-2xl mx-auto text-center">
-            <h2 className="text-3xl font-bold">Need a different integration?</h2>
-            <p className="mt-4 text-neutral-400">
-              We're always adding new integrations. Let us know what you need.
-            </p>
-            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
-              <Button href={ctaLinks.signUp} size="lg">
-                Start Free Trial
-              </Button>
-              <Button href={ctaLinks.demo} variant="outline" size="lg" className="border-neutral-600 text-white hover:bg-neutral-800">
-                Request Integration
-              </Button>
-            </div>
-          </div>
-        </Container>
-      </Section>
     </LandingLayout>
   );
 }

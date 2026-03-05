@@ -1,8 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Container, Section, Button, Badge } from '@/components/ui';
-import { ctaLinks } from '@/lib/constants';
+import { Container, Section, Badge } from '@/components/ui';
 import { fadeInUp, staggerContainer } from '@/lib/utils/animations';
 
 type FeatureHeroProps = {
@@ -45,17 +44,6 @@ export function FeatureHero({ badge, title, highlight, description }: FeatureHer
             {description}
           </motion.p>
 
-          <motion.div
-            variants={fadeInUp}
-            className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3"
-          >
-            <Button href={ctaLinks.signUp} size="lg">
-              Start Free Trial
-            </Button>
-            <Button href={ctaLinks.demo} variant="outline" size="lg">
-              Book a Demo
-            </Button>
-          </motion.div>
         </motion.div>
       </Container>
     </Section>

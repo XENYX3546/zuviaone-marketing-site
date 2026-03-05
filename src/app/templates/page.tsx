@@ -1,6 +1,6 @@
 import { LandingLayout } from '@/components/layout';
-import { Container, Section, Button, Badge, Icon } from '@/components/ui';
-import { siteConfig, ctaLinks } from '@/lib/constants';
+import { Container, Section, Badge, Icon } from '@/components/ui';
+import { siteConfig } from '@/lib/constants';
 import { templates, templateSlugs } from '@/lib/data';
 import Link from 'next/link';
 import type { Metadata } from 'next';
@@ -90,21 +90,6 @@ export default function TemplatesPage() {
         </Container>
       </Section>
 
-      <Section className="bg-purple-600 text-white">
-        <Container>
-          <div className="max-w-2xl mx-auto text-center">
-            <h2 className="text-3xl font-bold">Ready to automate?</h2>
-            <p className="mt-4 text-purple-100">
-              All templates are included free with your ZuviaOne account.
-            </p>
-            <div className="mt-8">
-              <Button href={ctaLinks.signUp} size="lg" className="bg-white text-purple-600 hover:bg-purple-50">
-                Start Free Trial
-              </Button>
-            </div>
-          </div>
-        </Container>
-      </Section>
     </LandingLayout>
   );
 }
