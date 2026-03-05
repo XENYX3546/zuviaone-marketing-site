@@ -4,6 +4,8 @@ import { siteConfig } from '@/lib/constants';
 import { getStatusPage } from '@/lib/status/client';
 import type { Metadata } from 'next';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: 'System Status',
   description:
